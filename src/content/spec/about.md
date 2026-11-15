@@ -1,27 +1,54 @@
-# 关于我 / About Me
+# 关于 duo
 
-你好！我是 **夏叶** ，一个在数字世界中默默无闻的一片叶子。
+我是 **duo**，一个写后端代码的人。
 
-## 🛠️ 关于本站
+白天写 Java、调 SQL、和缓存与并发打交道；晚上把白天绕出来的弯路记下来，顺手整理成能回头的笔记。这个站点就是那些记录的落脚处。
 
-这个网站使用 **Astro** 框架构建，采用了 [Firefly](https://github.com/CuteLeaf/Firefly) 模板，Firefly 是基于 [Fuwari](https://github.com/saicaca/fuwari) 的二次开发。
+## 这个站在做什么
 
-**Firefly** 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。
+只有两件事：
 
+- **经验总结** —— 做过的事、踩过的坑、下次怎么做更好。写完过一段时间再看，能直接照着做的那种。
+- **学习笔记** —— 学习过程中遇到的知识点，按主题整理。不追求大而全，追求"以后再遇到能马上查得到"。
 
-**🖥️在线预览： [Firefly - Demo site](https://firefly.cuteleaf.cn/)**
+所以这里不会出现每日打卡式的碎碎念，也不追热点新闻。一篇文章发出来，意味着它至少对某天的我自己有用。
 
-**📝Firefly使用文档： [https://docs-firefly.cuteleaf.cn](https://docs-firefly.cuteleaf.cn/)**
+## 会写哪些主题
 
-**⭐Firefly开源地址：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)** 
+内容主线跟着我的技术栈走，目前集中在：
 
-**⭐Fuwari开源地址：[https://github.com/saicaca/fuwari](https://github.com/saicaca/fuwari)**
+| 方向 | 具体内容 |
+| --- | --- |
+| Java | JVM 内存结构、并发与线程池、集合、Java 新特性 |
+| 数据库 | MySQL 索引与事务、锁、执行计划、慢查询 |
+| 分布式 | Redis 与缓存、分布式事务、消息与一致性 |
+| 计算机网络 | TCP/IP、HTTP、常见面试考点 |
+| 设计模式与架构 | 常用模式、分层与演进思路 |
 
-::github{repo="CuteLeaf/Firefly"}
+这些主题会以**系列**的形式连载，每个系列内部按依赖顺序编号，适合从头读到尾；单篇也能独立看。
 
-::github{repo="saicaca/fuwari"}
+## 文章是怎么写的
+
+两种模板，看内容性质选一种：
+
+**经验类**：背景 → 做法 → 踩坑 → 结论。重点在"踩坑"，因为正确的做法网上都有，错的那条路往往只有自己知道。
+
+**知识类**：一句话说清它是什么 → 一个最小的例子 → 容易记错或混淆的地方。重点在最后一段，那是我自己反复错的地方。
+
+写文章时会尽量用图：流程用 Mermaid，时序用 sequenceDiagram，涉及公式就上公式。能画出来的东西，就不写三段话描述。
+
+## 关于本站
+
+纯静态站点，用 **Astro** 构建，托管在 GitHub Pages 上。代码高亮、Mermaid 与 PlantUML 图、KaTeX 公式、多标签代码组都能直接用，写技术笔记够用了。
+
+## 找我
+
+- 文章里有错，或者你有更简单的解法 —— 直接在文章下留言，或者去 [留言板](/guestbook/) 说一句
+- 想追更 —— 订阅 [RSS](/rss/) 或 [Atom](/atom/)
+- 代码类的问题，去 [GitHub Issue](https://github.com/frereswim) 更合适
+
+留言都看，尽量回。
 
 ---
 
-*感谢你的来访！希望在这里能找到对你有用的内容！*
-
+*谢谢你来过。*
