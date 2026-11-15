@@ -24,6 +24,32 @@ const showTitle = widgetConfig?.showTitle !== false;
 // 从配置中获取站点开始日期
 const siteStartDate = siteConfig.siteStartDate || "2025-01-01";
 
+// 按本地时区解析 YYYY-MM-DD，避免 new Date("YYYY-MM-DD") 被当作 UTC 零点导致差一天
+function parseLocalDate(dateStr: string): Date {
+	const matched = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr.trim());
+	if (matched) {
+		return new Date(
+			Number(matched[1]),
+			Number(matched[2]) - 1,
+			Number(matched[3]),
+		);
+	}
+	const parsed = new Date(dateStr);
+	return Number.isNaN(parsed.getTime())
+		? new Date(2025, 0, 1)
+		: parsed;
+}
+
+// 运行天数：站点开始日期记为第 1 天，按本地自然日取整
+function calcRunningDays(startStr: string, now = new Date()): number {
+	const start = parseLocalDate(startStr);
+	const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+	const days = Math.floor((todayStart.getTime() - start.getTime()) / 86400000);
+	return Math.max(1, days + 1);
+}
+
+const runningDays = calcRunningDays(siteStartDate);
+
 // 获取所有文章
 const posts = await getSortedPosts();
 const categories = await getCategoryList();
@@ -95,7 +121,7 @@ const stats = [
 	{
 		icon: "material-symbols:calendar-clock-outline",
 		label: i18n(I18nKey.siteStatsRunningDays),
-		value: 0, // 将由客户端更新
+		value: runningDays, // 服务端按 siteStartDate 计算，客户端再校正
 		suffix: i18n(I18nKey.siteStatsDays).replace("{days}", ""),
 		dynamic: true,
 		id: "running-days",
@@ -145,10 +171,16 @@ const stats = [
   function updateDynamicStats() {
     const today = new Date();
 
-    // 更新运行天数
-    const startDate = new Date(siteStartDate);
-    const diffTime = Math.abs(today.getTime() - startDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    // 更新运行天数（站点开始日期记为第 1 天，按本地自然日计算）
+    const matched = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(siteStartDate).trim());
+    const startDate = matched
+      ? new Date(Number(matched[1]), Number(matched[2]) - 1, Number(matched[3]))
+      : new Date(siteStartDate);
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const diffDays = Math.max(
+      1,
+      Math.floor((todayStart.getTime() - startDate.getTime()) / 86400000) + 1
+    );
 
     const runningDaysElements = document.querySelectorAll('[data-stat-id="running-days"]');
     runningDaysElements.forEach((element) => {
