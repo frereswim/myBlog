@@ -8,6 +8,15 @@ import {
 
 const markdownImagePattern = /!\[([^\]]*)\]\((\S+?)(?:\s+["']([^"']*)["'])?\)/g;
 
+// 站内绝对路径需要补上 base（如 /myBlog），否则部署到子路径后图片会 404
+function withBase(src: string): string {
+	if (!src.startsWith("/")) return src;
+	if (/^(https?:)?\/\//i.test(src) || /^(data|blob):/i.test(src)) return src;
+	const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+	if (!base || src.startsWith(`${base}/`)) return src;
+	return `${base}${src}`;
+}
+
 export async function GET(): Promise<Response> {
 	const processor = await createMarkdownProcessor();
 	const dynamics = sortDynamics(await getCollection("dynamic"));
@@ -17,7 +26,11 @@ export async function GET(): Promise<Response> {
 			const markdown = (entry.body || "").replace(
 				markdownImagePattern,
 				(_match, alt: string, src: string, title?: string) => {
-					images.push({ alt, src, ...(title ? { title } : {}) });
+					images.push({
+						alt,
+						src: withBase(src),
+						...(title ? { title } : {}),
+					});
 					return "";
 				},
 			);
