@@ -52,17 +52,17 @@ export const siteConfig: SiteConfig = {
 
 	// 站点描述
 	description:
-		"Firefly 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。",
+		"duo 的个人站点：记录 Java、数据库、分布式与计算机网络的学习笔记，以及那些踩过的坑。",
 
 	// 站点关键词
 	keywords: [
-		"Firefly",
-		"Fuwari",
-		"Astro",
-		"ACGN",
-		"博客",
+		"duo",
+		"Java",
+		"后端开发",
+		"学习笔记",
 		"技术博客",
-		"静态博客",
+		"MySQL",
+		"Redis",
 	],
 
 	// 主题色
@@ -91,7 +91,7 @@ export const siteConfig: SiteConfig = {
 	favicon: [
 		{
 			// 图标文件路径
-			src: "/favicon/firefly-32.png",
+			src: "/favicon/cat-32.png",
 			// 可选，指定主题 'light' | 'dark'
 			// theme: "light",
 			// 可选，图标大小
@@ -112,12 +112,12 @@ export const siteConfig: SiteConfig = {
 		// 使用 Astro 图标库时不需要设置 valueDark，图标会自动跟随主题亮暗色切换
 		logo: {
 			type: "image",
-			value: "assets/images/logo/firefly-light.png",
-			valueDark: "assets/images/logo/firefly-dark.png",
-			alt: "🍀",
+			value: "assets/images/logo/cat-light.png",
+			valueDark: "assets/images/logo/cat-dark.png",
+			alt: "duo 的小站",
 		},
 		// 导航栏标题
-		title: "Firefly Blog",
+		title: "duo 的小站",
 		// 全宽导航栏，导航栏是否占满屏幕宽度
 		widthFull: false,
 		// 导航菜单对齐方式，left：左对齐，center：居中
