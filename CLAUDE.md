@@ -92,7 +92,7 @@ LQIP data is generated into `src/constants/lqips.json` and committed — regener
 
 ## Deployment
 
-- **Vercel** (default, `vercel.json`)
-- **Cloudflare Workers** (`wrangler.jsonc`, set `CF_WORKERS` env var)
-- Static output to `dist/`
+- **GitHub Pages only** — `.github/workflows/deploy.yml` builds `dist/` and publishes it on push to `master`
+- `base` is `/myBlog` and `site` comes from `siteConfig.site_url`, so both must stay in sync with the repository name
+- Static output to `dist/`; no server adapter is installed (Vercel/Cloudflare configs were removed)
 

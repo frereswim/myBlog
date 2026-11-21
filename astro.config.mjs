@@ -1,5 +1,4 @@
 import { setMaxListeners } from "node:events";
-import cloudflare from "@astrojs/cloudflare";
 import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -59,12 +58,6 @@ if (process.env.NODE_ENV === "development") {
 	setMaxListeners(20);
 }
 
-const adapter = process.env.CF_WORKERS
-	? cloudflare({
-			prerenderEnvironment: "node",
-		})
-	: undefined;
-
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.site_url,
@@ -108,8 +101,6 @@ export default defineConfig({
 			});
 	})(),
 
-	adapter,
-
 	// 图像优化配置
 	image: {
 		// 组件可自行传入 layout/widths；这里只控制 Markdown 正文图片
@@ -149,14 +140,13 @@ export default defineConfig({
 			},
 		}),
 		icon({
+			// 注意：这里只预加载 material-symbols。
+			// 曾经把 fa7-brands / fa7-regular / fa7-solid / simple-icons / mdi / mingcute 全部设为 ["*"]，
+			// 在内存偏紧的机器上 dev 启动到 “astro-icon Loaded icons” 时会触发 Node 原生崩溃
+			// （Windows 退出码 0xC0000409）。收紧后 dev 稳定，构建产物的图标集合与收紧前完全一致：
+			// 未预加载的图标会按需从已安装的 @iconify-json/* 包解析。
 			include: {
 				"material-symbols": ["*"],
-				"fa7-brands": ["*"],
-				"fa7-regular": ["*"],
-				"fa7-solid": ["*"],
-				"simple-icons": ["*"],
-				mdi: ["*"],
-				mingcute: ["*"],
 			},
 		}),
 		expressiveCode({
@@ -354,7 +344,14 @@ export default defineConfig({
 		plugins: [tailwindcss()],
 		server: {
 			watch: {
-				ignored: ["**/package/**", "**/Firefly-docs/**"],
+				ignored: [
+					"**/package/**",
+					"**/Firefly-docs/**",
+					// 编辑器（VS Code 等）原子保存时会在源文件旁生成 .<name>.<pid>.<uuid>.tmpdir/ 临时目录，
+					// Windows 上被 watcher 捕获会抛 EBUSY 并中断 dev server，这里统一忽略。
+					"**/.*.tmpdir/**",
+					"**/*.tmp",
+				],
 			},
 		},
 		resolve: {
