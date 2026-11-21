@@ -78,7 +78,7 @@ export const booknavConfig: BooknavGroup[] = [
 				title: "myBlog",
 				url: "https://github.com/frereswim/myBlog",
 				desc: "本站源码：Astro 静态博客",
-				icon: "/favicon/cat-32.png",
+				icon: "/favicon/brand-32.png",
 				weight: 10,
 			},
 		],
