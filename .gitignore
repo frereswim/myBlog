@@ -47,3 +47,7 @@ package/
 .codex*
 .claude
 .mimocode
+
+# codegraph 本地索引（体积大、可随时重建，不提交到远程）
+.codegraph/
+codegraph.config.json
