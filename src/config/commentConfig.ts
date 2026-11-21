@@ -52,15 +52,18 @@ export const commentConfig: CommentConfig = {
 	},
 
 	//giscus评论系统配置
+	// 启用步骤：仓库 Settings → General → Features 勾选 Discussions，
+	// 新建一个类别（例如 Announcements / Comments）→ 到 https://giscus.app 填入本仓库，
+	// 页面会给出 categoryId → 填到下方 categoryId，再把顶部 type 改成 "giscus"。
 	giscus: {
 		// 设置 Giscus 评论系统仓库
-		repo: "CuteLeaf/Firefly",
-		// 设置 Giscus 评论系统仓库ID
-		repoId: "R_kgD2gfdFGd",
+		repo: "frereswim/myBlog",
+		// 设置 Giscus 评论系统仓库ID（GitHub API 的 node_id）
+		repoId: "R_kgDOVuB9SQ",
 		// 设置 Giscus 评论系统分类
-		category: "General",
-		// 获取 Giscus 评论系统分类ID
-		categoryId: "DIC_kwDOKy9HOc4CegmW",
+		category: "Comments",
+		// 获取 Giscus 评论系统分类ID（待补充：https://giscus.app）
+		categoryId: "",
 		// 获取 Giscus 评论系统映射方式
 		mapping: "title",
 		// 获取 Giscus 评论系统严格模式
